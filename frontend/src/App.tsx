@@ -1,21 +1,24 @@
-// src/App.tsx
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import BackgroundMesh from "./components/layout/BackgroundMesh";
+import Navbar from './components/layout/Navbar';
 import Home from './pages/home';
-// We will uncomment these as we build them
-import Engineering from './pages/Engineering';
-// import Media from './pages/Media';
+import ITWork from './pages/ITWork';
+import Photography from './pages/Photography';
 
 export default function App() {
   return (
     <Router>
-      <div className="min-h-screen bg-slate-950 text-gray-100 font-sans selection:bg-red-500/30">
-        {/* Navbar component can be slotted in here later */}
-        
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/engineering" element={<Engineering />} />
-          {/* <Route path="/media" element={<Media />} /> */}
-        </Routes>
+      <BackgroundMesh />
+      <div className="relative min-h-screen text-slate-900 font-sans selection:bg-blue-200">
+        <Navbar />
+
+        <main className="max-w-6xl mx-auto px-6 py-24">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/it-work" element={<ITWork />} /> 
+           <Route path="/photography" element={<Photography />} /> 
+          </Routes>
+        </main>
       </div>
     </Router>
   );

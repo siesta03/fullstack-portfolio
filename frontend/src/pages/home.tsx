@@ -1,64 +1,123 @@
 // src/pages/Home.tsx
+import { motion, type Variants } from 'framer-motion';
+import { ArrowRight, Code2, Camera, MapPin, GraduationCap } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { Code2, Camera } from 'lucide-react';
+import GlassCard from '../components/ui/GlassCard';
+
+const containerVariants: Variants = { // <-- Add : Variants
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: { staggerChildren: 0.15 }
+  }
+};
+
+const itemVariants: Variants = { // <-- Add : Variants
+  hidden: { y: 20, opacity: 0 },
+  show: { 
+    y: 0, 
+    opacity: 1, 
+    transition: { type: "spring", stiffness: 300, damping: 24 } 
+  }
+};
 
 export default function Home() {
   return (
-    <main className="max-w-5xl mx-auto px-6 py-24 flex flex-col justify-center min-h-screen">
-      
+    <motion.div 
+      variants={containerVariants}
+      initial="hidden"
+      animate="show"
+      className="flex flex-col gap-20 pt-12 pb-24"
+    >
       {/* Hero Section */}
-      <div className="space-y-6 mb-20">
-        <h1 className="text-5xl md:text-7xl font-bold tracking-tighter uppercase font-mono">
-          System. <br />
-          <span className="text-gray-500">Capture.</span>
-          <span className="text-red-500 animate-pulse">_</span>
+      <motion.section variants={itemVariants} className="text-center max-w-3xl mx-auto px-4 mt-12">
+        <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-slate-900 mb-6">
+          Bridging logic <br className="hidden md:block" /> 
+          <span className="text-slate-400">&</span> creative design.
         </h1>
-        <p className="text-lg md:text-xl text-gray-400 max-w-2xl leading-relaxed">
-          Computer Science student and freelance photographer based in Klang. 
-          Bridging the gap between scalable software architecture and visual media production.
+        <p className="text-lg md:text-xl text-slate-600 mb-10 leading-relaxed">
+          Full-stack developer and multimedia producer specializing in scalable software architecture, 3D simulations, and high-contrast commercial media.
         </p>
-      </div>
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <Link to="/it-work" className="w-full sm:w-auto px-8 py-3 bg-slate-900 text-white rounded-full font-medium hover:bg-slate-800 transition-colors flex items-center justify-center gap-2">
+            View Software <ArrowRight className="w-4 h-4" />
+          </Link>
+          <Link to="/photography" className="w-full sm:w-auto px-8 py-3 bg-white/50 backdrop-blur-md border border-slate-200 text-slate-900 rounded-full font-medium hover:bg-white/80 transition-colors flex items-center justify-center gap-2">
+            View Media
+          </Link>
+        </div>
+      </motion.section>
 
-      {/* Navigation Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        
-        <Link to="/engineering" className="group relative">
-          {/* Accent Glow */}
-          <div className="absolute -inset-0.5 bg-red-500/20 blur-xl rounded-2xl opacity-0 group-hover:opacity-100 transition duration-500"></div>
-          
-          {/* Glass Card */}
-          <div className="relative h-full bg-slate-900/40 backdrop-blur-md border border-white/10 rounded-2xl p-8 flex flex-col items-start gap-4 hover:border-white/20 transition">
-            <div className="p-3 rounded-xl bg-white/5 border border-white/10">
-              <Code2 className="w-6 h-6 text-gray-300 group-hover:text-red-500 transition-colors" />
+      {/* About Section */}
+      <motion.section variants={itemVariants} className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <GlassCard className="md:col-span-2 flex flex-col justify-center">
+          <h2 className="text-2xl font-semibold mb-4 text-slate-900">Background</h2>
+          <p className="text-slate-600 leading-relaxed mb-6">
+            Detail-oriented Computer Science graduate offering a versatile technical skill set. I actively bridge programming logic with multimedia production, developing interactive applications and managing high-volume commercial digital assets.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-6 mt-auto">
+            <div className="flex items-center gap-3 text-sm text-slate-600">
+              <div className="p-2 bg-blue-50 text-blue-600 rounded-full">
+                <GraduationCap className="w-4 h-4" />
+              </div>
+              UiTM Shah Alam & Kuala Terengganu
             </div>
-            <div>
-              <h2 className="text-2xl font-bold font-mono uppercase mb-2 tracking-tight">Engineering</h2>
-              <p className="text-gray-400 text-sm">
-                Full-stack development, 3D simulations, and web applications.
-              </p>
+            <div className="flex items-center gap-3 text-sm text-slate-600">
+              <div className="p-2 bg-rose-50 text-rose-600 rounded-full">
+                <MapPin className="w-4 h-4" />
+              </div>
+              Klang, Selangor
             </div>
           </div>
+        </GlassCard>
+
+        <GlassCard className="flex flex-col">
+          <h2 className="text-xl font-semibold mb-4 text-slate-900">Technical Stack</h2>
+          <div className="flex flex-wrap gap-2 mt-auto">
+            {['React', 'TypeScript', 'Node.js', 'Express', 'PostgreSQL', 'C#', 'Unity', 'Blender', 'Adobe Lightroom', 'CapCut'].map((skill) => (
+              <span 
+                key={skill} 
+                className="px-3 py-1.5 text-xs font-medium bg-white/60 border border-slate-200 rounded-full text-slate-700 shadow-sm"
+              >
+                {skill}
+              </span>
+            ))}
+          </div>
+        </GlassCard>
+      </motion.section>
+
+      {/* Work Preview Section */}
+      <motion.section variants={itemVariants} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <Link to="/it-work" className="block focus:outline-none">
+          <GlassCard className="h-full flex flex-col group">
+            <div className="p-4 bg-slate-50 border border-slate-100 rounded-2xl w-fit mb-6 group-hover:scale-105 transition-transform">
+              <Code2 className="w-8 h-8 text-slate-700" />
+            </div>
+            <h3 className="text-2xl font-semibold text-slate-900 mb-2">Software Engineering</h3>
+            <p className="text-slate-600 mb-6">
+              SaaS platforms, driving simulators, and full-stack web applications utilizing React and Node.js.
+            </p>
+            <div className="mt-auto text-blue-600 font-medium flex items-center gap-2 group-hover:gap-3 transition-all">
+              Explore Projects <ArrowRight className="w-4 h-4" />
+            </div>
+          </GlassCard>
         </Link>
 
-        <Link to="/media" className="group relative">
-          {/* Accent Glow */}
-          <div className="absolute -inset-0.5 bg-red-500/20 blur-xl rounded-2xl opacity-0 group-hover:opacity-100 transition duration-500"></div>
-          
-          {/* Glass Card */}
-          <div className="relative h-full bg-slate-900/40 backdrop-blur-md border border-white/10 rounded-2xl p-8 flex flex-col items-start gap-4 hover:border-white/20 transition">
-            <div className="p-3 rounded-xl bg-white/5 border border-white/10">
-              <Camera className="w-6 h-6 text-gray-300 group-hover:text-red-500 transition-colors" />
+        <Link to="/photography" className="block focus:outline-none">
+          <GlassCard className="h-full flex flex-col group">
+            <div className="p-4 bg-slate-50 border border-slate-100 rounded-2xl w-fit mb-6 group-hover:scale-105 transition-transform">
+              <Camera className="w-8 h-8 text-slate-700" />
             </div>
-            <div>
-              <h2 className="text-2xl font-bold font-mono uppercase mb-2 tracking-tight">Media</h2>
-              <p className="text-gray-400 text-sm">
-                Freelance photography, event coverage, and equipment rentals.
-              </p>
+            <h3 className="text-2xl font-semibold text-slate-900 mb-2">Media & Photography</h3>
+            <p className="text-slate-600 mb-6">
+              Commercial studio shoots, event coverage, and high-quality digital asset production.
+            </p>
+            <div className="mt-auto text-blue-600 font-medium flex items-center gap-2 group-hover:gap-3 transition-all">
+              View Gallery <ArrowRight className="w-4 h-4" />
             </div>
-          </div>
+          </GlassCard>
         </Link>
-        
-      </div>
-    </main>
+      </motion.section>
+    </motion.div>
   );
 }
