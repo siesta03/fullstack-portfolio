@@ -1,105 +1,244 @@
-// src/pages/Photography.tsx
-import { useState } from 'react';
-import { motion, type Variants } from 'framer-motion';
-import { Camera, Aperture, MapPin } from 'lucide-react';
-import GlassCard from '../components/ui/GlassCard';
-import Modal from '../components/ui/Modal';
-import { photographyWork } from '../data/portfolioData';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { X } from 'lucide-react';
+import { BlurFade } from '../components/ui/BlurFade';
 
-const containerVariants: Variants = { // <-- Add : Variants
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: { staggerChildren: 0.15 }
-  }
-};
+// Load marathon images from the assets folder using Vite's glob import
+const marathonModules = import.meta.glob('../assets/photography-marathon/*.JPG', { eager: true });
+const marathonImages = Object.keys(marathonModules)
+  .sort((a, b) => {
+    const numA = parseInt(a.match(/m(\d+)\.JPG/)?.[1] || '0', 10);
+    const numB = parseInt(b.match(/m(\d+)\.JPG/)?.[1] || '0', 10);
+    return numA - numB;
+  })
+  .map((key, index) => ({
+    id: `m${index + 1}`,
+    url: (marathonModules[key] as any).default,
+    alt: `Marathon ${index + 1}`
+  }));
 
-const itemVariants: Variants = { // <-- Add : Variants
-  hidden: { y: 20, opacity: 0 },
-  show: { 
-    y: 0, 
-    opacity: 1, 
-    transition: { type: "spring", stiffness: 300, damping: 24 } 
-  }
-};
+// Load convo images from the assets folder using Vite's glob import
+const convoModules = import.meta.glob('../assets/photography-convo/*.jpg', { eager: true });
+const convoImages = Object.keys(convoModules)
+  .sort((a, b) => {
+    const numA = parseInt(a.match(/c(\d+)\.jpg/)?.[1] || '0', 10);
+    const numB = parseInt(b.match(/c(\d+)\.jpg/)?.[1] || '0', 10);
+    return numA - numB;
+  })
+  .map((key, index) => ({
+    id: `c${index + 1}`,
+    url: (convoModules[key] as any).default,
+    alt: `Convo ${index + 1}`
+  }));
+
+// Load anime images from the assets folder using Vite's glob import
+const animeModules = import.meta.glob('../assets/photography-anime/*.JPG', { eager: true });
+const animeImages = Object.keys(animeModules)
+  .sort((a, b) => {
+    const numA = parseInt(a.match(/a(\d+)\.JPG/)?.[1] || '0', 10);
+    const numB = parseInt(b.match(/a(\d+)\.JPG/)?.[1] || '0', 10);
+    return numA - numB;
+  })
+  .map((key, index) => ({
+    id: `a${index + 1}`,
+    url: (animeModules[key] as any).default,
+    alt: `Anime ${index + 1}`
+  }));
+
+// Load product images from the assets folder using Vite's glob import
+const productModules = import.meta.glob('../assets/photography-product/*.JPG', { eager: true });
+const productImages = Object.keys(productModules)
+  .sort((a, b) => {
+    const numA = parseInt(a.match(/p(\d+)\.JPG/)?.[1] || '0', 10);
+    const numB = parseInt(b.match(/p(\d+)\.JPG/)?.[1] || '0', 10);
+    return numA - numB;
+  })
+  .map((key, index) => ({
+    id: `p${index + 1}`,
+    url: (productModules[key] as any).default,
+    alt: `Product ${index + 1}`
+  }));
+
+// Load event images from the assets folder using Vite's glob import
+const eventModules = import.meta.glob('../assets/photography-event/*.{jpg,JPG}', { eager: true });
+const eventImages = Object.keys(eventModules)
+  .sort((a, b) => {
+    const numA = parseInt(a.match(/e(\d+)\.[jJ][pP][gG]/)?.[1] || '0', 10);
+    const numB = parseInt(b.match(/e(\d+)\.[jJ][pP][gG]/)?.[1] || '0', 10);
+    return numA - numB;
+  })
+  .map((key, index) => ({
+    id: `e${index + 1}`,
+    url: (eventModules[key] as any).default,
+    alt: `Event ${index + 1}`
+  }));
+
+// Sample data fallback
+const gallerySections = [
+  {
+    id: "marathon",
+    title: "Marathon",
+    details: "Capturing the endurance and spirit of long-distance runners in dynamic environments.",
+    images: marathonImages.length > 0 ? marathonImages : [
+      { id: "m1", url: "https://images.unsplash.com/photo-1530143311094-34d807799e8f?auto=format&fit=crop&w=1200&q=80", alt: "Marathon runner crossing finish line" },
+      { id: "m2", url: "https://images.unsplash.com/photo-1552674605-15c2198be903?auto=format&fit=crop&w=1200&q=80", alt: "Marathon runners in motion" }
+    ]
+  },
+  {
+    id: "convo",
+    title: "Convo",
+    details: "Milestones and memories from graduation ceremonies, focusing on raw emotion.",
+    images: convoImages.length > 0 ? convoImages : [
+      { id: "c1", url: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1200&q=80", alt: "Graduation cap toss" },
+      { id: "c2", url: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=1200&q=80", alt: "Graduates celebrating" }
+    ]
+  },
+  {
+    id: "anime",
+    title: "Anime",
+    details: "Anime conventions and vibrant cosplay events.",
+    images: animeImages.length > 0 ? animeImages : [
+      { id: "a1", url: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=1200&q=80", alt: "Anime 1" },
+      { id: "a2", url: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=1200&q=80", alt: "Anime 2" }
+    ]
+  },
+  {
+    id: "product",
+    title: "Product",
+    details: "Clean, commercial studio photography tailored for brand campaigns.",
+    images: productImages.length > 0 ? productImages : [
+      { id: "p1", url: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=1200&q=80", alt: "Headphones product shot" },
+      { id: "p2", url: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=1200&q=80", alt: "Watch product shot" }
+    ]
+  },
+  {
+    id: "event",
+    title: "Event",
+    details: "Live, fast-paced documentation of corporate and public events.",
+    images: eventImages.length > 0 ? eventImages : [
+      { id: "e1", url: "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=1200&q=80", alt: "Concert crowd" },
+      { id: "e2", url: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1200&q=80", alt: "Event stage lighting" }
+    ]
+  },
+];
 
 export default function Photography() {
-  const [selectedMedia, setSelectedMedia] = useState<typeof photographyWork[0] | null>(null);
+  const [selectedImage, setSelectedImage] = useState<{ id: string, url: string, alt: string } | null>(null);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
-    <motion.div variants={containerVariants} initial="hidden" animate="show" className="pt-12">
+    <div className="w-full min-h-screen bg-[#EBEBEB] text-gray-900 pb-40 font-sans">
       
-      {/* Page Header */}
-      <motion.div variants={itemVariants} className="mb-16">
-        <div className="inline-flex items-center gap-2 px-3 py-1 bg-rose-50 border border-rose-100 text-rose-600 rounded-full text-sm font-medium mb-4">
-          <Camera className="w-4 h-4" /> Visual Media
+      {/* 1. EDITORIAL HEADER SECTION */}
+      <div className="w-full pt-32 pb-16 md:pt-48 md:pb-24 overflow-hidden border-b-[8px] border-gray-900">
+        <div className="max-w-[100rem] mx-auto px-6 md:px-12 flex flex-col md:flex-row justify-between items-start md:items-end gap-12">
+          <BlurFade delay={0.1} inView>
+            <h1 className="text-7xl md:text-[10rem] font-black tracking-tighter text-gray-900 leading-[0.8] uppercase">
+              Index <br />
+              <span className="font-serif font-normal italic text-gray-500">
+                02.
+              </span>
+            </h1>
+          </BlurFade>
+          
+          <BlurFade delay={0.2} inView className="max-w-md">
+            <div className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-gray-900 mb-4 border-b-[2px] border-gray-900 pb-2 inline-block">
+              Visual Archive
+            </div>
+            <p className="text-sm md:text-base text-gray-700 leading-relaxed font-medium">
+              A curated index of professional lens work. Unfiltered, unstructured documentation from commercial shoots to high-speed marathons.
+            </p>
+          </BlurFade>
         </div>
-        <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-slate-900 mb-4">
-          Commercial & Event Photography
-        </h1>
-        <p className="text-lg text-slate-600 max-w-2xl">
-          Freelance photography and digital asset production, ranging from studio product shoots to live, fast-paced event documentation.
-        </p>
-      </motion.div>
+      </div>
 
-      {/* Media Grid */}
-      <motion.div variants={itemVariants} className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {photographyWork.map((work) => (
-          <GlassCard 
-            key={work.id} 
-            onClick={() => setSelectedMedia(work)}
-            className="flex flex-col h-full group"
-          >
-            <div className="aspect-[4/3] w-full bg-slate-100 rounded-xl mb-6 overflow-hidden border border-slate-200/60 relative">
-               {/* Replace this div with an actual <img /> */}
-               <div className="absolute inset-0 flex items-center justify-center text-slate-400 font-medium text-sm transition-transform duration-700 group-hover:scale-105">
-                 Cover Image: {work.title}
-               </div>
-            </div>
-            <p className="text-rose-600 text-sm font-semibold mb-2">{work.category}</p>
-            <h2 className="text-2xl font-semibold text-slate-900 mb-3">{work.title}</h2>
-            <p className="text-slate-600 mb-4 line-clamp-2">{work.description}</p>
-          </GlassCard>
-        ))}
-      </motion.div>
-
-      {/* Detail Modal */}
-      <Modal isOpen={!!selectedMedia} onClose={() => setSelectedMedia(null)}>
-        {selectedMedia && (
-          <div className="space-y-6">
-            {/* Image Carousel Placeholder */}
-            <div className="grid grid-cols-2 gap-4">
-              {selectedMedia.images.map((img, idx) => (
-                <div key={idx} className={`bg-slate-100 rounded-xl border border-slate-200/60 flex items-center justify-center text-slate-400 text-sm font-medium ${idx === 0 ? 'col-span-2 aspect-video' : 'aspect-square'}`}>
-                  {img} Placeholder
-                </div>
-              ))}
-            </div>
+      {/* 2. GALLERY SECTIONS */}
+      <div className="w-full flex flex-col pt-12 md:pt-24 gap-24 md:gap-40">
+        {gallerySections.map((section, index) => (
+          <div key={section.id} className="w-full flex flex-col">
             
-            <div className="pt-4">
-              <p className="text-rose-600 text-sm font-semibold mb-1">{selectedMedia.category}</p>
-              <h2 className="text-3xl font-bold text-slate-900 mb-4">{selectedMedia.title}</h2>
-              <p className="text-slate-600 leading-relaxed mb-6">{selectedMedia.description}</p>
-              
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-white/50 border border-slate-200 rounded-2xl p-5">
-                <div>
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2 flex items-center gap-1.5">
-                    <Aperture className="w-3.5 h-3.5" /> Equipment Used
-                  </h4>
-                  <p className="text-slate-800 font-medium text-sm">{selectedMedia.gear}</p>
-                </div>
-                <div>
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2 flex items-center gap-1.5">
-                    <MapPin className="w-3.5 h-3.5" /> Location
-                  </h4>
-                  <p className="text-slate-800 font-medium text-sm">{selectedMedia.location}</p>
-                </div>
+            {/* STICKY SECTION HEADER */}
+            <div className="sticky top-[0px] z-30 bg-[#EBEBEB] border-y-[4px] border-gray-900 mb-12 md:mb-0">
+              <div className="max-w-[100rem] mx-auto w-full px-6 md:px-12 py-6 flex flex-col md:flex-row md:items-end justify-between gap-4">
+                <BlurFade delay={0.1} inView>
+                  <div className="flex flex-col">
+                    <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter text-gray-900 leading-none">{section.title}</h2>
+                    <p className="font-mono text-xs md:text-sm text-gray-600 uppercase tracking-widest mt-3">{section.details}</p>
+                  </div>
+                </BlurFade>
+                
+                <BlurFade delay={0.2} inView>
+                  <div className="text-lg md:text-2xl font-black tracking-tighter uppercase text-gray-400">
+                    VOL. 0{index + 1}
+                  </div>
+                </BlurFade>
               </div>
             </div>
-          </div>
-        )}
-      </Modal>
 
-    </motion.div>
+            {/* SPACED MASONRY GRID (Up to 6 columns) */}
+            <div className="w-full max-w-[120rem] mx-auto px-6 md:px-12 columns-2 sm:columns-3 md:columns-4 lg:columns-5 xl:columns-6 gap-6 md:gap-8">
+              {section.images.map((img, imgIndex) => (
+                <BlurFade delay={0.1 + (imgIndex * 0.05)} inView key={img.id} className="break-inside-avoid mb-6 md:mb-8 block">
+                  <div 
+                    onClick={() => setSelectedImage(img)}
+                    className="relative w-full overflow-hidden cursor-zoom-in group/image bg-gray-200 border-[2px] border-gray-200 hover:border-gray-900 transition-colors duration-300"
+                  >
+                    <img 
+                      src={img.url} 
+                      alt={img.alt} 
+                      className="w-full h-auto block grayscale-[20%] group-hover/image:grayscale-0 group-hover/image:scale-[1.02] transition-all duration-500"
+                      loading="lazy"
+                    />
+                  </div>
+                </BlurFade>
+              ))}
+            </div>
+
+          </div>
+        ))}
+      </div>
+
+      {/* LIGHTBOX MODAL */}
+      <AnimatePresence>
+        {selectedImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-[#EBEBEB] p-4 md:p-12 cursor-zoom-out"
+            onClick={() => setSelectedImage(null)}
+          >
+            {/* Close Button */}
+            <button 
+              className="absolute top-6 right-6 p-4 bg-gray-900 text-[#EBEBEB] hover:bg-gray-800 transition-colors z-[110]"
+              onClick={(e) => { e.stopPropagation(); setSelectedImage(null); }}
+            >
+              <X className="w-8 h-8" />
+            </button>
+
+            {/* Clean scale/fade animation instead of layoutId warping */}
+            <motion.div 
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="relative flex items-center justify-center w-full h-full"
+              onClick={(e) => e.stopPropagation()} 
+            >
+              <img 
+                src={selectedImage.url} 
+                alt={selectedImage.alt} 
+                className="max-w-full max-h-full object-contain border-[8px] md:border-[16px] border-gray-900 shadow-2xl"
+              />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+      
+    </div>
   );
 }
