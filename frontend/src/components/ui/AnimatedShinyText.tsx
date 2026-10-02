@@ -9,13 +9,11 @@ export function cn(...inputs: ClassValue[]) {
 interface AnimatedShinyTextProps {
   children: React.ReactNode;
   className?: string;
-  shimmerWidth?: number;
 }
 
 export default function AnimatedShinyText({
   children,
   className,
-  shimmerWidth = 100,
 }: AnimatedShinyTextProps) {
   return (
     <motion.p

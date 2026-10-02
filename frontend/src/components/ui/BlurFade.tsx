@@ -1,12 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import type { Variants } from "framer-motion";
 import { useRef } from "react";
-import { clsx, type ClassValue } from "clsx";
-import { twMerge } from "tailwind-merge";
-
-function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
-}
 
 interface BlurFadeProps {
   children: React.ReactNode;

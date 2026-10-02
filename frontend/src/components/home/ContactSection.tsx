@@ -38,15 +38,15 @@ export default function ContactSection() {
             02 / Network
           </div>
           <div className="flex flex-col justify-end h-full">
-            <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" className="text-4xl lg:text-5xl font-black uppercase tracking-tighter hover:text-blue-700 transition-colors flex justify-between items-center group py-4">
+            <a href="https://github.com/siesta03" target="_blank" rel="noopener noreferrer" className="text-4xl lg:text-5xl font-black uppercase tracking-tighter hover:text-blue-700 transition-colors flex justify-between items-center group py-4">
               GitHub <ArrowRight className="w-8 h-8 opacity-0 group-hover:opacity-100 transform -translate-x-4 group-hover:translate-x-0 transition-all" />
             </a>
             <div className="w-full h-[2px] bg-gray-900/10" />
-            <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer" className="text-4xl lg:text-5xl font-black uppercase tracking-tighter hover:text-blue-700 transition-colors flex justify-between items-center group py-4">
+            <a href="https://linkedin.com/in/ziqo" target="_blank" rel="noopener noreferrer" className="text-4xl lg:text-5xl font-black uppercase tracking-tighter hover:text-blue-700 transition-colors flex justify-between items-center group py-4">
               LinkedIn <ArrowRight className="w-8 h-8 opacity-0 group-hover:opacity-100 transform -translate-x-4 group-hover:translate-x-0 transition-all" />
             </a>
             <div className="w-full h-[2px] bg-gray-900/10" />
-            <a href="https://instagram.com/yourusername" target="_blank" rel="noopener noreferrer" className="text-4xl lg:text-5xl font-black uppercase tracking-tighter hover:text-orange-600 transition-colors flex justify-between items-center group py-4">
+            <a href="https://instagram.com/zeeq_11" target="_blank" rel="noopener noreferrer" className="text-4xl lg:text-5xl font-black uppercase tracking-tighter hover:text-orange-600 transition-colors flex justify-between items-center group py-4">
               Instagram <ArrowRight className="w-8 h-8 opacity-0 group-hover:opacity-100 transform -translate-x-4 group-hover:translate-x-0 transition-all" />
             </a>
           </div>
@@ -58,10 +58,10 @@ export default function ContactSection() {
             03 / Direct
           </div>
           <div className="flex flex-col gap-4 mt-auto">
-            <a href="mailto:your.email@gmail.com" className="w-full bg-gray-900 text-[#EBEBEB] text-lg md:text-xl lg:text-2xl font-black uppercase tracking-widest py-6 px-4 text-center hover:bg-blue-700 transition-colors">
+            <a href="mailto:haziqamani579@gmail.com" className="w-full bg-gray-900 text-[#EBEBEB] text-lg md:text-xl lg:text-2xl font-black uppercase tracking-widest py-6 px-4 text-center hover:bg-blue-700 transition-colors">
               Email Me
             </a>
-            <a href="https://wa.me/60000000000" target="_blank" rel="noopener noreferrer" className="w-full bg-transparent border-[4px] border-gray-900 text-gray-900 text-lg md:text-xl lg:text-2xl font-black uppercase tracking-widest py-6 px-4 text-center hover:bg-gray-900 hover:text-[#EBEBEB] transition-colors">
+            <a href="https://api.whatsapp.com/send?phone=60189779241" target="_blank" rel="noopener noreferrer" className="w-full bg-transparent border-[4px] border-gray-900 text-gray-900 text-lg md:text-xl lg:text-2xl font-black uppercase tracking-widest py-6 px-4 text-center hover:bg-gray-900 hover:text-[#EBEBEB] transition-colors">
               WhatsApp
             </a>
           </div>

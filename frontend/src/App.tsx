@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import BackgroundMesh from "./components/layout/BackgroundMesh";
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';

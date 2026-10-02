@@ -1,7 +1,7 @@
 // src/components/layout/Navbar.tsx
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Home, Code, Camera, Mail, User } from 'lucide-react';
+import { Home, Code, Camera, Mail } from 'lucide-react';
 
 export default function Navbar() {
   const location = useLocation();
