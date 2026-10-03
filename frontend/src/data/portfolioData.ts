@@ -24,6 +24,12 @@ import el3 from '../assets/system-ecolegacy/el3.webp';
 import el4 from '../assets/system-ecolegacy/el4.webp';
 import el5 from '../assets/system-ecolegacy/el5.webp';
 
+import op1 from '../assets/system-offlinepocket/op1.webp';
+import op2 from '../assets/system-offlinepocket/op2.webp';
+import op3 from '../assets/system-offlinepocket/op3.webp';
+import op4 from '../assets/system-offlinepocket/op4.webp';
+import op5 from '../assets/system-offlinepocket/op5.webp';
+
 export const itProjects = [
   {
     id: "occusync",
@@ -71,7 +77,7 @@ export const itProjects = [
     category: "E-Commerce",
     description: "A mock e-commerce system for in-game top-up purchases and services, featuring a fully responsive front-end interface and secure transaction simulation.",
     techStack: ["PHP", "SQL", "JavaScript", "CSS"],
-    images: ["/images/offline-1.webp", "/images/offline-2.webp", "/images/offline-3.webp"],
+    images: [op1,op2,op3,op4,op5],
     link: null, // No link for this project
     linkType: null
   }

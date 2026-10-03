@@ -176,7 +176,7 @@ export default function ITWork() {
 
                               {/* Image Container */}
                               <div 
-                                className="relative aspect-video w-full overflow-hidden bg-gray-300 border-[2px] border-gray-900 cursor-pointer group"
+                                className="relative aspect-video w-full overflow-hidden bg-gray-300 border-[2px] border-gray-900 cursor-pointer group p-4 md:p-8"
                                 onClick={(e) => handleNextImage(e, project)}
                               >
                                 <AnimatePresence mode="wait">
@@ -184,7 +184,7 @@ export default function ITWork() {
                                     key={currentImageIndex}
                                     src={project.images[currentImageIndex]}
                                     alt={`${project.title} preview ${currentImageIndex + 1}`}
-                                    className="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-500"
+                                    className="w-full h-full object-contain grayscale-[30%] group-hover:grayscale-0 transition-all duration-500"
                                     initial={{ opacity: 0, scale: 1.05 }}
                                     animate={{ opacity: 1, scale: 1 }}
                                     exit={{ opacity: 0, scale: 0.95 }}

@@ -124,6 +124,7 @@ const gallerySections = [
 
 export default function Photography() {
   const [selectedImage, setSelectedImage] = useState<{ id: string, url: string, alt: string } | null>(null);
+  const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -180,8 +181,8 @@ export default function Photography() {
 
             {/* SPACED MASONRY GRID (Up to 6 columns) */}
             <div className="w-full max-w-[120rem] mx-auto px-6 md:px-12 columns-2 sm:columns-3 md:columns-4 lg:columns-5 xl:columns-6 gap-6 md:gap-8">
-              {section.images.map((img, imgIndex) => (
-                <BlurFade delay={0.1 + (imgIndex * 0.05)} inView key={img.id} className="break-inside-avoid mb-6 md:mb-8 block">
+              {(expandedSections[section.id] ? section.images : section.images.slice(0, 6)).map((img, imgIndex) => (
+                <BlurFade delay={0.1 + (Math.min(imgIndex, 6) * 0.05)} inView key={img.id} className="break-inside-avoid mb-6 md:mb-8 block">
                   <div 
                     onClick={() => setSelectedImage(img)}
                     className="relative w-full overflow-hidden cursor-zoom-in group/image bg-gray-200 border-[2px] border-gray-200 hover:border-gray-900 transition-colors duration-300"
@@ -196,6 +197,18 @@ export default function Photography() {
                 </BlurFade>
               ))}
             </div>
+
+            {/* SEE MORE BUTTON */}
+            {section.images.length > 6 && (
+              <div className="w-full flex justify-center mt-8 px-6">
+                <button
+                  onClick={() => setExpandedSections(prev => ({ ...prev, [section.id]: !prev[section.id] }))}
+                  className="font-mono text-sm md:text-base font-bold uppercase tracking-widest border-[2px] border-gray-900 px-8 py-4 bg-transparent text-gray-900 hover:bg-gray-900 hover:text-[#EBEBEB] transition-colors duration-300 shadow-[4px_4px_0px_rgba(17,24,39,1)] hover:shadow-none hover:translate-x-[4px] hover:translate-y-[4px]"
+                >
+                  {expandedSections[section.id] ? "See Less" : "See More"}
+                </button>
+              </div>
+            )}
 
           </div>
         ))}

@@ -11,7 +11,7 @@ export default function AboutSection() {
     { name: "Unity", style: "font-serif italic text-gray-400" },
     { name: "Blender 3D", style: "font-black uppercase tracking-widest" },
     { name: "Lightroom", style: "font-serif italic text-gray-400" },
-    { name: "Figma", style: "font-black uppercase tracking-widest" },
+    { name: "Gira", style: "font-black uppercase tracking-widest" },
     { name: "Camera Ops", style: "font-serif italic text-gray-400" }
   ];
 
@@ -41,7 +41,7 @@ export default function AboutSection() {
                     Background
                   </h3>
                   <p className="text-sm md:text-base font-bold text-gray-900 uppercase tracking-wide">
-                    CS Degree <br /> UiTM Shah Alam
+                    CS Degree in Multimedia Computing <br /> UiTM Shah Alam
                   </p>
                 </div>
                 <div>
@@ -72,7 +72,7 @@ export default function AboutSection() {
                 */}
                 <p className="text-base md:text-lg lg:text-xl text-gray-700 leading-relaxed font-medium text-justify 
                   first-letter:float-left first-letter:text-7xl md:first-letter:text-9xl first-letter:font-black first-letter:text-gray-900 first-letter:mr-4 md:first-letter:mr-6 first-letter:mt-2 first-letter:leading-none">
-                  I am a Computer Science graduate combining strong programming architecture with hands-on multimedia production. From engineering full-stack SaaS platforms to developing interactive 3D simulations, I build dynamic digital experiences. When I'm not writing React or C#, I'm likely operating a Canon R10, shooting commercial photography, or managing production logistics. My approach treats code and camera as two tools serving the exact same purpose: crafting unforgettable experiences and solving complex problems with aesthetic precision.
+                  I am a Computer Science graduate combining strong programming architecture with hands-on multimedia production. From engineering full-stack systems to developing interactive 3D simulations, I build dynamic digital experiences. When I'm not writing React or C#, I'm likely operating a Camera, shooting commercial photography, or editing industrial images. My approach treats code and camera as two tools serving the exact same purpose: crafting unforgettable experiences and solving complex problems with aesthetic precision.
                 </p>
               </div>
             </BlurFade>

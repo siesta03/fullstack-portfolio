@@ -47,9 +47,9 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-          className="absolute top-[15%] md:top-[20%] left-4 md:left-12 lg:left-20 z-0"
+          className="absolute top-[10%] md:top-[20%] left-4 md:left-12 lg:left-20 z-0"
         >
-          <h1 className="text-[26vw] md:text-[20vw] lg:text-[15rem] font-black tracking-tighter leading-[0.75] text-gray-300/70 select-none drop-shadow-sm">
+          <h1 className="text-[20vw] md:text-[20vw] lg:text-[15rem] font-black tracking-tighter leading-[0.75] text-gray-300/70 select-none drop-shadow-sm">
             HAZIQ
           </h1>
         </motion.div>
@@ -76,15 +76,15 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className="absolute bottom-[20%] md:bottom-[15%] right-4 md:right-12 lg:right-20 z-20 text-right pointer-events-none"
+          className="absolute top-[18%] md:top-auto md:bottom-[15%] left-4 md:left-auto md:right-12 lg:right-20 z-20 text-left md:text-right pointer-events-none"
         >
-          <h1 className="text-[26vw] md:text-[20vw] lg:text-[15rem] font-black tracking-tighter leading-[0.75] text-white mix-blend-difference select-none">
+          <h1 className="text-[20vw] md:text-[20vw] lg:text-[15rem] font-black tracking-tighter leading-[0.75] text-white mix-blend-difference select-none">
             REDZUAN.
           </h1>
         </motion.div>
 
         {/* Floating Content: Bottom Left (Role & Description) */}
-        <div className="absolute bottom-12 left-6 md:bottom-20 md:left-12 lg:left-20 z-30 max-w-[200px] md:max-w-xs pointer-events-auto">
+        <div className="absolute bottom-32 left-6 md:bottom-20 md:left-12 lg:left-20 z-30 max-w-[200px] md:max-w-xs pointer-events-auto">
           <BlurFade delay={0.6} inView>
             <div className="flex flex-col gap-4">
               <div>
@@ -108,7 +108,7 @@ export default function HeroSection() {
         </div>
 
         {/* Floating Content: Top Right (Local Time Widget) */}
-        <div className="absolute top-24 right-6 md:top-32 md:right-12 lg:right-20 z-30 pointer-events-auto">
+        <div className="absolute top-8 right-6 md:top-32 md:right-12 lg:right-20 z-30 pointer-events-auto">
           <BlurFade delay={0.7} inView>
             <div className="flex flex-col items-end gap-1.5 text-right bg-white/60 backdrop-blur-md border border-white/50 px-4 py-2.5 rounded-lg shadow-sm">
               <span className="text-[9px] md:text-[10px] font-black tracking-[0.2em] uppercase text-gray-500">
