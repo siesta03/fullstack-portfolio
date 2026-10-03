@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { BlurFade } from '../ui/BlurFade';
 
 // Ensure your silhouette image is a .png with a transparent background
-import heroImage from '../../assets/profile-silhouette.png'; 
+import heroImage from '../../assets/profile-silhouette.webp'; 
 
 // A simple hook to get current time in KL
 function useKualaLumpurTime() {
@@ -37,7 +37,7 @@ export default function HeroSection() {
       {/* Film Grain Texture */}
       <div 
         className="absolute inset-0 z-0 opacity-[0.04] pointer-events-none mix-blend-multiply"
-        style={{ backgroundImage: 'url("https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Dissolve_Noise_Texture.png")' }}
+        style={{ backgroundImage: 'url("https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Dissolve_Noise_Texture.webp")' }}
       />
 
       <div className="relative w-full max-w-[100rem] mx-auto px-6 md:px-12 flex flex-col items-center justify-center h-full z-10 min-h-screen pointer-events-none">

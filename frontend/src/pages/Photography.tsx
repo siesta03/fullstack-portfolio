@@ -4,11 +4,11 @@ import { X } from 'lucide-react';
 import { BlurFade } from '../components/ui/BlurFade';
 
 // Load marathon images from the assets folder using Vite's glob import
-const marathonModules = import.meta.glob('../assets/photography-marathon/*.JPG', { eager: true });
+const marathonModules = import.meta.glob('../assets/photography-marathon/*.webp', { eager: true });
 const marathonImages = Object.keys(marathonModules)
   .sort((a, b) => {
-    const numA = parseInt(a.match(/m(\d+)\.JPG/)?.[1] || '0', 10);
-    const numB = parseInt(b.match(/m(\d+)\.JPG/)?.[1] || '0', 10);
+    const numA = parseInt(a.match(/m(\d+)\.webp/)?.[1] || '0', 10);
+    const numB = parseInt(b.match(/m(\d+)\.webp/)?.[1] || '0', 10);
     return numA - numB;
   })
   .map((key, index) => ({
@@ -18,11 +18,11 @@ const marathonImages = Object.keys(marathonModules)
   }));
 
 // Load convo images from the assets folder using Vite's glob import
-const convoModules = import.meta.glob('../assets/photography-convo/*.jpg', { eager: true });
+const convoModules = import.meta.glob('../assets/photography-convo/*.webp', { eager: true });
 const convoImages = Object.keys(convoModules)
   .sort((a, b) => {
-    const numA = parseInt(a.match(/c(\d+)\.jpg/)?.[1] || '0', 10);
-    const numB = parseInt(b.match(/c(\d+)\.jpg/)?.[1] || '0', 10);
+    const numA = parseInt(a.match(/c(\d+)\.webp/)?.[1] || '0', 10);
+    const numB = parseInt(b.match(/c(\d+)\.webp/)?.[1] || '0', 10);
     return numA - numB;
   })
   .map((key, index) => ({
@@ -32,11 +32,11 @@ const convoImages = Object.keys(convoModules)
   }));
 
 // Load anime images from the assets folder using Vite's glob import
-const animeModules = import.meta.glob('../assets/photography-anime/*.JPG', { eager: true });
+const animeModules = import.meta.glob('../assets/photography-anime/*.webp', { eager: true });
 const animeImages = Object.keys(animeModules)
   .sort((a, b) => {
-    const numA = parseInt(a.match(/a(\d+)\.JPG/)?.[1] || '0', 10);
-    const numB = parseInt(b.match(/a(\d+)\.JPG/)?.[1] || '0', 10);
+    const numA = parseInt(a.match(/a(\d+)\.webp/)?.[1] || '0', 10);
+    const numB = parseInt(b.match(/a(\d+)\.webp/)?.[1] || '0', 10);
     return numA - numB;
   })
   .map((key, index) => ({
@@ -46,11 +46,11 @@ const animeImages = Object.keys(animeModules)
   }));
 
 // Load product images from the assets folder using Vite's glob import
-const productModules = import.meta.glob('../assets/photography-product/*.JPG', { eager: true });
+const productModules = import.meta.glob('../assets/photography-product/*.webp', { eager: true });
 const productImages = Object.keys(productModules)
   .sort((a, b) => {
-    const numA = parseInt(a.match(/p(\d+)\.JPG/)?.[1] || '0', 10);
-    const numB = parseInt(b.match(/p(\d+)\.JPG/)?.[1] || '0', 10);
+    const numA = parseInt(a.match(/p(\d+)\.webp/)?.[1] || '0', 10);
+    const numB = parseInt(b.match(/p(\d+)\.webp/)?.[1] || '0', 10);
     return numA - numB;
   })
   .map((key, index) => ({
@@ -60,11 +60,11 @@ const productImages = Object.keys(productModules)
   }));
 
 // Load event images from the assets folder using Vite's glob import
-const eventModules = import.meta.glob('../assets/photography-event/*.{jpg,JPG}', { eager: true });
+const eventModules = import.meta.glob('../assets/photography-event/*.webp', { eager: true });
 const eventImages = Object.keys(eventModules)
   .sort((a, b) => {
-    const numA = parseInt(a.match(/e(\d+)\.[jJ][pP][gG]/)?.[1] || '0', 10);
-    const numB = parseInt(b.match(/e(\d+)\.[jJ][pP][gG]/)?.[1] || '0', 10);
+    const numA = parseInt(a.match(/e(\d+)\.webp/)?.[1] || '0', 10);
+    const numB = parseInt(b.match(/e(\d+)\.webp/)?.[1] || '0', 10);
     return numA - numB;
   })
   .map((key, index) => ({

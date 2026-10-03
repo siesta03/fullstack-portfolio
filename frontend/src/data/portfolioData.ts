@@ -1,28 +1,28 @@
 // src/data/portfolioData.ts
 
-import oc1 from '../assets/system-occusync/oc1.jpeg';
-import oc2 from '../assets/system-occusync/oc2.jpeg';
-import oc3 from '../assets/system-occusync/oc3.jpeg';
-import oc4 from '../assets/system-occusync/oc4.jpeg';
-import oc5 from '../assets/system-occusync/oc5.jpeg';
+import oc1 from '../assets/system-occusync/oc1.webp';
+import oc2 from '../assets/system-occusync/oc2.webp';
+import oc3 from '../assets/system-occusync/oc3.webp';
+import oc4 from '../assets/system-occusync/oc4.webp';
+import oc5 from '../assets/system-occusync/oc5.webp';
 
-import cg1 from '../assets/system-circuitgo/cg1.png';
-import cg2 from '../assets/system-circuitgo/cg2.png';
-import cg3 from '../assets/system-circuitgo/cg3.png';
-import cg4 from '../assets/system-circuitgo/cg4.png';
-import cg5 from '../assets/system-circuitgo/cg5.png';
+import cg1 from '../assets/system-circuitgo/cg1.webp';
+import cg2 from '../assets/system-circuitgo/cg2.webp';
+import cg3 from '../assets/system-circuitgo/cg3.webp';
+import cg4 from '../assets/system-circuitgo/cg4.webp';
+import cg5 from '../assets/system-circuitgo/cg5.webp';
 
-import st1 from '../assets/system-studioPortfolio/st1.png';
-import st2 from '../assets/system-studioPortfolio/st2.png';
-import st3 from '../assets/system-studioPortfolio/st3.png';
-import st4 from '../assets/system-studioPortfolio/st4.png';
-import st5 from '../assets/system-studioPortfolio/st5.png';
+import st1 from '../assets/system-studioPortfolio/st1.webp';
+import st2 from '../assets/system-studioPortfolio/st2.webp';
+import st3 from '../assets/system-studioPortfolio/st3.webp';
+import st4 from '../assets/system-studioPortfolio/st4.webp';
+import st5 from '../assets/system-studioPortfolio/st5.webp';
 
-import el1 from '../assets/system-ecolegacy/el1.png';
-import el2 from '../assets/system-ecolegacy/el2.png';
-import el3 from '../assets/system-ecolegacy/el3.png';
-import el4 from '../assets/system-ecolegacy/el4.png';
-import el5 from '../assets/system-ecolegacy/el5.png';
+import el1 from '../assets/system-ecolegacy/el1.webp';
+import el2 from '../assets/system-ecolegacy/el2.webp';
+import el3 from '../assets/system-ecolegacy/el3.webp';
+import el4 from '../assets/system-ecolegacy/el4.webp';
+import el5 from '../assets/system-ecolegacy/el5.webp';
 
 export const itProjects = [
   {
@@ -71,7 +71,7 @@ export const itProjects = [
     category: "E-Commerce",
     description: "A mock e-commerce system for in-game top-up purchases and services, featuring a fully responsive front-end interface and secure transaction simulation.",
     techStack: ["PHP", "SQL", "JavaScript", "CSS"],
-    images: ["/images/offline-1.jpg", "/images/offline-2.jpg", "/images/offline-3.jpg"],
+    images: ["/images/offline-1.webp", "/images/offline-2.webp", "/images/offline-3.webp"],
     link: null, // No link for this project
     linkType: null
   }

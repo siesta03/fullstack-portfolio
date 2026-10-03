@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import { BlurFade } from '../ui/BlurFade';
 
 // IMPORTANT: Add these images to your assets folder, or update the paths to match your actual preview images!
-import softwarePreview from '../../assets/software-preview.jpg'; 
-import photoPreview from '../../assets/photo-preview.jpg';
+import softwarePreview from '../../assets/software-preview.webp'; 
+import photoPreview from '../../assets/photo-preview.webp';
 
 export default function ProjectSection() {
   return (
@@ -39,6 +39,7 @@ export default function ProjectSection() {
                 src={softwarePreview} 
                 alt="Software Engineering" 
                 className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
+                loading="lazy"
               />
               <div className="absolute top-6 left-6 bg-gray-900 text-white text-2xl font-black px-4 py-2">01</div>
             </div>
@@ -85,6 +86,7 @@ export default function ProjectSection() {
                 src={photoPreview} 
                 alt="Media & Photography" 
                 className="w-full h-full object-cover grayscale opacity-80 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
+                loading="lazy"
               />
               <div className="absolute top-6 right-6 bg-white text-gray-900 text-2xl font-black px-4 py-2">02</div>
             </div>
