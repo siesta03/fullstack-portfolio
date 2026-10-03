@@ -24,11 +24,11 @@ import el3 from '../assets/system-ecolegacy/el3.webp';
 import el4 from '../assets/system-ecolegacy/el4.webp';
 import el5 from '../assets/system-ecolegacy/el5.webp';
 
-import op1 from '../assets/system-offlinepocket/op1.webp';
-import op2 from '../assets/system-offlinepocket/op2.webp';
-import op3 from '../assets/system-offlinepocket/op3.webp';
-import op4 from '../assets/system-offlinepocket/op4.webp';
-import op5 from '../assets/system-offlinepocket/op5.webp';
+import op1 from '../assets/system-offlinePocket/op1.webp';
+import op2 from '../assets/system-offlinePocket/op2.webp';
+import op3 from '../assets/system-offlinePocket/op3.webp';
+import op4 from '../assets/system-offlinePocket/op4.webp';
+import op5 from '../assets/system-offlinePocket/op5.webp';
 
 export const itProjects = [
   {
