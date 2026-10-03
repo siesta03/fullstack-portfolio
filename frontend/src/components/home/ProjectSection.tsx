@@ -4,7 +4,7 @@ import { BlurFade } from '../ui/BlurFade';
 
 // IMPORTANT: Add these images to your assets folder, or update the paths to match your actual preview images!
 import softwarePreview from '../../assets/software-preview.jpg'; 
-import photoPreview from '../../assets/photo-preview.jpg';
+import photoPreview from '../../assets/photo-preview.JPG';
 
 export default function ProjectSection() {
   return (
