@@ -17,6 +17,7 @@ async function optimizeImages() {
     try {
       // Resize to max 1920px width to save space, and convert to webp (quality 80)
       await sharp(img)
+        .rotate() // This applies the EXIF orientation to the pixels
         .resize({ width: 1920, withoutEnlargement: true })
         .webp({ quality: 80 })
         .toFile(webpPath);
