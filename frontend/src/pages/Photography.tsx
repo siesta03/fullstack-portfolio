@@ -181,21 +181,25 @@ export default function Photography() {
 
             {/* SPACED MASONRY GRID (Up to 6 columns) */}
             <div className="w-full max-w-[120rem] mx-auto px-6 md:px-12 columns-2 sm:columns-3 md:columns-4 lg:columns-5 xl:columns-6 gap-6 md:gap-8">
-              {(expandedSections[section.id] ? section.images : section.images.slice(0, 6)).map((img, imgIndex) => (
+              {(expandedSections[section.id] ? section.images : section.images.slice(0, 6)).map((img, imgIndex) => {
+                const isLCP = index === 0 && imgIndex < 4;
+                return (
                 <BlurFade delay={0.1 + (Math.min(imgIndex, 6) * 0.05)} inView key={img.id} className="break-inside-avoid mb-6 md:mb-8 block">
                   <div 
                     onClick={() => setSelectedImage(img)}
-                    className="relative w-full overflow-hidden cursor-zoom-in group/image bg-gray-200 border-[2px] border-gray-200 hover:border-gray-900 transition-colors duration-300"
+                    className="relative w-full overflow-hidden cursor-zoom-in group/image bg-gray-200 border-[2px] border-gray-200 hover:border-gray-900 transition-colors duration-300 [content-visibility:auto] [contain-intrinsic-size:300px] min-h-[150px]"
                   >
                     <img 
                       src={img.url} 
                       alt={img.alt} 
                       className="w-full h-auto block grayscale-[20%] group-hover/image:grayscale-0 group-hover/image:scale-[1.02] transition-all duration-500"
-                      loading="lazy"
+                      loading={isLCP ? undefined : "lazy"}
+                      fetchPriority={isLCP ? "high" : undefined}
+                      decoding="async"
                     />
                   </div>
                 </BlurFade>
-              ))}
+              )})}
             </div>
 
             {/* SEE MORE BUTTON */}
