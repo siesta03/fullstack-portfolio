@@ -187,7 +187,7 @@ export default function Photography() {
                 <BlurFade delay={isLCP ? 0 : 0.1 + (Math.min(imgIndex, 6) * 0.05)} inView={!isLCP} key={img.id} className="break-inside-avoid mb-6 md:mb-8 block">
                   <div 
                     onClick={() => setSelectedImage(img)}
-                    className="relative w-full overflow-hidden cursor-zoom-in group/image bg-gray-200 border-[2px] border-gray-200 hover:border-gray-900 transition-colors duration-300 [content-visibility:auto] [contain-intrinsic-size:300px] min-h-[150px]"
+                    className="relative w-full overflow-hidden cursor-zoom-in group/image bg-gray-200 border-[2px] border-gray-200 hover:border-gray-900 transition-colors duration-300 min-h-[150px] md:min-h-[250px]"
                   >
                     <img 
                       src={img.url} 
