@@ -4,7 +4,7 @@ import { X } from 'lucide-react';
 import { BlurFade } from '../components/ui/BlurFade';
 
 // Load marathon images from the assets folder using Vite's glob import
-const marathonModules = import.meta.glob('../assets/photography-marathon/*.webp', { eager: true });
+const marathonModules = import.meta.glob('../assets/photography-marathon/*.webp', { eager: true, query: '?url', import: 'default' }) as Record<string, string>;
 const marathonImages = Object.keys(marathonModules)
   .sort((a, b) => {
     const numA = parseInt(a.match(/m(\d+)\.webp/)?.[1] || '0', 10);
@@ -13,12 +13,12 @@ const marathonImages = Object.keys(marathonModules)
   })
   .map((key, index) => ({
     id: `m${index + 1}`,
-    url: (marathonModules[key] as any).default,
+    url: marathonModules[key],
     alt: `Marathon ${index + 1}`
   }));
 
 // Load convo images from the assets folder using Vite's glob import
-const convoModules = import.meta.glob('../assets/photography-convo/*.webp', { eager: true });
+const convoModules = import.meta.glob('../assets/photography-convo/*.webp', { eager: true, query: '?url', import: 'default' }) as Record<string, string>;
 const convoImages = Object.keys(convoModules)
   .sort((a, b) => {
     const numA = parseInt(a.match(/c(\d+)\.webp/)?.[1] || '0', 10);
@@ -27,12 +27,12 @@ const convoImages = Object.keys(convoModules)
   })
   .map((key, index) => ({
     id: `c${index + 1}`,
-    url: (convoModules[key] as any).default,
+    url: convoModules[key],
     alt: `Convo ${index + 1}`
   }));
 
 // Load anime images from the assets folder using Vite's glob import
-const animeModules = import.meta.glob('../assets/photography-anime/*.webp', { eager: true });
+const animeModules = import.meta.glob('../assets/photography-anime/*.webp', { eager: true, query: '?url', import: 'default' }) as Record<string, string>;
 const animeImages = Object.keys(animeModules)
   .sort((a, b) => {
     const numA = parseInt(a.match(/a(\d+)\.webp/)?.[1] || '0', 10);
@@ -41,12 +41,12 @@ const animeImages = Object.keys(animeModules)
   })
   .map((key, index) => ({
     id: `a${index + 1}`,
-    url: (animeModules[key] as any).default,
+    url: animeModules[key],
     alt: `Anime ${index + 1}`
   }));
 
 // Load product images from the assets folder using Vite's glob import
-const productModules = import.meta.glob('../assets/photography-product/*.webp', { eager: true });
+const productModules = import.meta.glob('../assets/photography-product/*.webp', { eager: true, query: '?url', import: 'default' }) as Record<string, string>;
 const productImages = Object.keys(productModules)
   .sort((a, b) => {
     const numA = parseInt(a.match(/p(\d+)\.webp/)?.[1] || '0', 10);
@@ -55,12 +55,12 @@ const productImages = Object.keys(productModules)
   })
   .map((key, index) => ({
     id: `p${index + 1}`,
-    url: (productModules[key] as any).default,
+    url: productModules[key],
     alt: `Product ${index + 1}`
   }));
 
 // Load event images from the assets folder using Vite's glob import
-const eventModules = import.meta.glob('../assets/photography-event/*.webp', { eager: true });
+const eventModules = import.meta.glob('../assets/photography-event/*.webp', { eager: true, query: '?url', import: 'default' }) as Record<string, string>;
 const eventImages = Object.keys(eventModules)
   .sort((a, b) => {
     const numA = parseInt(a.match(/e(\d+)\.webp/)?.[1] || '0', 10);
@@ -69,7 +69,7 @@ const eventImages = Object.keys(eventModules)
   })
   .map((key, index) => ({
     id: `e${index + 1}`,
-    url: (eventModules[key] as any).default,
+    url: eventModules[key],
     alt: `Event ${index + 1}`
   }));
 
@@ -184,7 +184,7 @@ export default function Photography() {
               {(expandedSections[section.id] ? section.images : section.images.slice(0, 6)).map((img, imgIndex) => {
                 const isLCP = index === 0 && imgIndex < 4;
                 return (
-                <BlurFade delay={0.1 + (Math.min(imgIndex, 6) * 0.05)} inView key={img.id} className="break-inside-avoid mb-6 md:mb-8 block">
+                <BlurFade delay={isLCP ? 0 : 0.1 + (Math.min(imgIndex, 6) * 0.05)} inView={!isLCP} key={img.id} className="break-inside-avoid mb-6 md:mb-8 block">
                   <div 
                     onClick={() => setSelectedImage(img)}
                     className="relative w-full overflow-hidden cursor-zoom-in group/image bg-gray-200 border-[2px] border-gray-200 hover:border-gray-900 transition-colors duration-300 [content-visibility:auto] [contain-intrinsic-size:300px] min-h-[150px]"
