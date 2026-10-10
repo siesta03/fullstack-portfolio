@@ -125,9 +125,22 @@ const gallerySections = [
 export default function Photography() {
   const [selectedImage, setSelectedImage] = useState<{ id: string, url: string, alt: string } | null>(null);
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({});
+  const [columnCount, setColumnCount] = useState(6);
 
   useEffect(() => {
     window.scrollTo(0, 0);
+
+    const updateColumns = () => {
+      if (window.innerWidth >= 1280) setColumnCount(6); // xl
+      else if (window.innerWidth >= 1024) setColumnCount(5); // lg
+      else if (window.innerWidth >= 768) setColumnCount(4); // md
+      else if (window.innerWidth >= 640) setColumnCount(3); // sm
+      else setColumnCount(2); // default
+    };
+
+    updateColumns();
+    window.addEventListener('resize', updateColumns);
+    return () => window.removeEventListener('resize', updateColumns);
   }, []);
 
   return (
@@ -140,7 +153,7 @@ export default function Photography() {
             <h1 className="text-7xl md:text-[10rem] font-black tracking-tighter text-gray-900 leading-[0.8] uppercase">
               Index <br />
               <span className="font-serif font-normal italic text-gray-500">
-                02.
+                03.
               </span>
             </h1>
           </BlurFade>
@@ -179,31 +192,64 @@ export default function Photography() {
               </div>
             </div>
 
-            {/* SPACED MASONRY GRID (Up to 6 columns) */}
-            <div className="w-full max-w-[120rem] mx-auto px-6 md:px-12 columns-2 sm:columns-3 md:columns-4 lg:columns-5 xl:columns-6 gap-6 md:gap-8">
-              {(expandedSections[section.id] ? section.images : section.images.slice(0, 6)).map((img, imgIndex) => {
-                const isLCP = index === 0 && imgIndex < 4;
+            {/* ROUND-ROBIN MASONRY FLEXBOX */}
+            <div className="w-full max-w-[120rem] mx-auto px-6 md:px-12 flex gap-6 md:gap-8 items-start">
+              {Array.from({ length: columnCount }).map((_, colIndex) => {
+                // Distribute images into columns round-robin
+                const colImages = section.images
+                  .map((img, originalIndex) => ({ img, originalIndex }))
+                  .filter((_, index) => index % columnCount === colIndex);
+
                 return (
-                <BlurFade delay={isLCP ? 0 : 0.1 + (Math.min(imgIndex, 6) * 0.05)} inView={!isLCP} key={img.id} className="break-inside-avoid mb-6 md:mb-8 inline-block w-full">
-                  <div 
-                    onClick={() => setSelectedImage(img)}
-                    className="relative w-full overflow-hidden cursor-zoom-in group/image bg-gray-200 border-[2px] border-gray-200 hover:border-gray-900 transition-colors duration-300 min-h-[150px] md:min-h-[250px]"
-                  >
-                    <img 
-                      src={img.url} 
-                      alt={img.alt} 
-                      className="w-full h-auto block grayscale-[20%] group-hover/image:grayscale-0 group-hover/image:scale-[1.02] transition-all duration-500"
-                      loading={isLCP ? undefined : "lazy"}
-                      fetchPriority={isLCP ? "high" : undefined}
-                      decoding="async"
-                    />
+                  <div key={colIndex} className="flex flex-col gap-6 md:gap-8 flex-1 w-full min-w-0">
+                    {colImages.map(({ img, originalIndex }, colItemIndex) => {
+                      // If collapsed, only show the first item in each column (forming 1 row)
+                      if (!expandedSections[section.id] && colItemIndex > 0) return null;
+
+                      const isLCP = index === 0 && originalIndex < 4;
+                      
+                      return (
+                        <BlurFade 
+                          delay={isLCP ? 0 : 0.1 + (Math.min(originalIndex, 18) * 0.05)} 
+                          inView={!isLCP} 
+                          key={img.id} 
+                          className="w-full"
+                        >
+                          <div 
+                            onClick={() => setSelectedImage(img)}
+                            className="relative w-full overflow-hidden cursor-zoom-in group/image bg-gray-200 border-[2px] border-gray-200 hover:border-gray-900 transition-colors duration-300 min-h-[150px] md:min-h-[250px]"
+                          >
+                            <img 
+                              src={img.url} 
+                              alt={img.alt} 
+                              className="w-full h-auto block grayscale-[20%] group-hover/image:grayscale-0 group-hover/image:scale-[1.02] transition-all duration-500"
+                              loading={isLCP ? undefined : "lazy"}
+                              fetchPriority={isLCP ? "high" : undefined}
+                              decoding="async"
+                            />
+                          </div>
+                        </BlurFade>
+                      );
+                    })}
                   </div>
-                </BlurFade>
-              )})}
+                );
+              })}
             </div>
 
             {/* SEE MORE BUTTON */}
-            {section.images.length > 6 && (
+            {section.images.length > columnCount && !expandedSections[section.id] && (
+              <div className="w-full flex justify-center mt-8 px-6">
+                <button
+                  onClick={() => setExpandedSections(prev => ({ ...prev, [section.id]: true }))}
+                  className="font-mono text-sm md:text-base font-bold uppercase tracking-widest border-[2px] border-gray-900 px-8 py-4 bg-transparent text-gray-900 hover:bg-gray-900 hover:text-[#EBEBEB] transition-colors duration-300 shadow-[4px_4px_0px_rgba(17,24,39,1)] hover:shadow-none hover:translate-x-[4px] hover:translate-y-[4px]"
+                >
+                  See More
+                </button>
+              </div>
+            )}
+            
+            {/* SEE LESS BUTTON */}
+            {expandedSections[section.id] && section.images.length > columnCount && (
               <div className="w-full flex justify-center mt-8 px-6">
                 <button
                   onClick={() => setExpandedSections(prev => ({ ...prev, [section.id]: !prev[section.id] }))}

@@ -55,7 +55,7 @@ export default function ITWork() {
             <h1 className="text-7xl md:text-[10rem] font-black tracking-tighter text-gray-900 leading-[0.8] uppercase">
               SYS.LOG <br />
               <span className="font-serif font-normal italic text-gray-500">
-                03.
+                02.
               </span>
             </h1>
           </BlurFade>
