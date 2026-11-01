@@ -28,6 +28,28 @@ async function optimizeImages() {
       console.error(`Failed to process ${img}:`, e);
     }
   }
+
+  // Also optimize any existing oversized or uncompressed webp images
+  const webpImages = await glob('src/assets/**/*.{webp,WEBP}');
+  for (const img of webpImages) {
+    try {
+      const meta = await sharp(img).metadata();
+      const stat = await fs.stat(img);
+      // If image is wider than 1920px or larger than 1.5MB, re-compress
+      if ((meta.width && meta.width > 1920) || stat.size > 1.5 * 1024 * 1024) {
+        console.log(`Optimizing large webp ${img} (${(stat.size / 1024 / 1024).toFixed(2)} MB, ${meta.width}x${meta.height})...`);
+        const buffer = await sharp(img)
+          .rotate()
+          .resize({ width: 1920, withoutEnlargement: true })
+          .webp({ quality: 80 })
+          .toBuffer();
+        await fs.writeFile(img, buffer);
+        console.log(`Optimized ${img} -> ${(buffer.length / 1024 / 1024).toFixed(2)} MB`);
+      }
+    } catch (e) {
+      console.error(`Failed to process webp ${img}:`, e);
+    }
+  }
   
   console.log('\nImages converted. Now updating source files...');
   

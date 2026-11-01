@@ -9,6 +9,7 @@
     "build": "tsc -b && vite build",
     "lint": "oxlint",
     "preview": "vite preview",
+    "compress": "node compress.js",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },
